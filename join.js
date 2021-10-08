@@ -8,7 +8,7 @@ let nums = ['1', '2', '3', '4']; //ตัวแปรใน array
 console.log(names.join());
 // กำหนดค่าตัวขั้นกลางไว้เป็น (_) โดยผลลัพธ์ก็จะเป็น 1_2_3_4
 console.log(nums.join('_'));
-
+//
 console.log(
   nums
     .filter((x) => {
