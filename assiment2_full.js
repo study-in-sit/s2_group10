@@ -1,6 +1,6 @@
 class Question {
   //สร้าง class สำหรับคำถาม
-  constructor(question, point, answer, choice) {
+  constructor(question = 'unknonwn', point, answer, choice) {
     //สร้าง constructor ที่ประกอบด้วย คำถาม, คะแนน, คำตอบ, ตัวเลือก
     this.question = String(question); //กำหนด datatype เป็น String เพื่อให้รองรับการเก็บคำถามได้ทุกชนิด
     this.point = point; //คะเเนน
