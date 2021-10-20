@@ -10,20 +10,34 @@
 
 const example = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-let i = 0;
-
 // การบวก เลข โดยจะ รันค่าหาผลลัพธ์ไปทีละ ค่าเป็น current ในเเต่ละ callback จะเก็บ เป็น prev ในก่อนหน้า โดย prev เเรก จะใช้เป็น index ตัวที่ 0 ของ array เเต่
 // ถ้า เรา มี paremeter ที่ 2 จะใช้ ตัวนั้น เป็น prev เเรก
 
 // กรณี prev เริ่ม ที่ index เเรก คือ 1 loop 9 รอบ เพราะ ไม่นับ index เเรก
+console.log('----------testReduce');
 const testReduce = example.reduce((prev, current, currentIndex, array) => {
-  console.log(prev, current, currentIndex);
+  console.log(
+    'prev:',
+    prev,
+    'current:',
+    current,
+    'currentIndex:',
+    currentIndex
+  );
   return prev + current;
 });
 
-//กรณี prev เริ่ม ที่ ค่า 10 เเล้ว loop 10 รอบ ตามจำนวน length
+//กรณี prev เริ่ม ที่ ค่า 10 เเล้ว loop 10 รอบ ตามจำนวน length.
+console.log('----------testReduce2');
 const testReduce2 = example.reduce((prev, current, currentIndex, array) => {
-  console.log(prev, current, currentIndex);
+  console.log(
+    'prev:',
+    prev,
+    'current:',
+    current,
+    'currentIndex:',
+    currentIndex
+  );
   return prev + current;
 }, 10);
 
@@ -34,18 +48,19 @@ const mathFunction = (prev, current) => (prev += current % 2);
 
 const testReduce3 = example.reduce(mathFunction, 0);
 
-console.log({ testReduce });
-console.log({ testReduce2 });
-console.log({ testReduce3 });
-
 // callback
 const test = (callback, arg1) => {
-  console.log(5);
-  return callback(arg1, 50 * 50);
+  const x = 100;
+  return callback(arg1, x * 50);
 };
 
 const test2 = (x, y) => {
   return x + y;
 };
 
+console.log('----------result');
+console.log({ testReduce });
+console.log({ testReduce2 });
+console.log({ testReduce3 });
+console.log('----------callback');
 console.log(test(test2, 5));
