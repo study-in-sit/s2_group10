@@ -1,0 +1,39 @@
+/* {
+  PURPLE_LIGHT: '#C28DFF',
+  PURPLE_DARK: '#4F2580',
+  PURPLE_BG: '#F7DBF0',
+  PURPLE_DARK_BG: '#120338',
+  GRAY_LIGHT: '#E4E4E4',
+  GRAY_LIGHT2: '#F2F2F2',
+  GRAY_DARK: '#848484',
+  PURPLE_BTN_LIGHT: '#B371FF',
+  PURPLE_BTN_LIGHT_0: '#c08bfc',
+  PURPLE_BTN_DARK: '#4F2580',
+  YELLOW_BINANCE: '#F0B90B',
+  GLEEN_PROFIT: '#93C353',
+  YELLOW_BORDER: '#FFD04D',
+  RED_PROFIT: '#ff7875',
+}; */
+
+html {
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  padding: 20px 50px;
+  margin: 50px 50px;
+  background-color: #120338;
+  color: #f0b90b;
+  border-radius: 10px;
+}
+
+.food_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px 10px;
+}
+
+.food_item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
