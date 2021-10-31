@@ -19,6 +19,10 @@ html {
   font-family: 'Lato', sans-serif;
 }
 
+h4 {
+  margin: 2px;
+}
+
 .container {
   padding: 20px 50px;
   margin: 50px 50px;
@@ -34,6 +38,23 @@ html {
 }
 
 .food_item {
+  background-color: #4f2580;
+  padding: 2rem;
+  border-radius: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.food_item .food_img {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.food_item .food_img img {
+  width: 300px;
+  height: 300px;
+  border-radius: 2rem;
+  object-fit: cover;
 }
