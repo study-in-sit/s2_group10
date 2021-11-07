@@ -12,28 +12,35 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&display=swap"
       rel="stylesheet"
     />
+    <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
   </head>
   <body>
+    <div id="show_cart" class="show_cart_container">
+      <span class="iconify" data-icon="bx:bxs-cart-alt"></span>
+    </div>
+    <div class="shopping_cart">
+      <h2>Your cart</h2>
+      <div class="cart_container">
+        <div class="cart_item">
+          <img
+            alt=""
+            src="https://img.bestrecipes.com.au/Iz_tFerq/br/2019/10/spiced-lamb-sausage-fattoush-954624-1.jpg"
+          />
+          <div>
+            <h3>Name</h3>
+            <h3>Amount</h3>
+            <h3>Price</h3>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <h1>GROUP 10 FOOD PRODUCT LIST</h1>
       <div class="event_container">
         <div class="seaching">
           <h2>Search Products</h2>
-          <input placeholder="Input name" />
-          <button>Search</button>
-        </div>
-        <div class="seaching">
-          <h2>Add Products</h2>
-          <div>
-            <input class="input_create" placeholder="Image source" />
-            <input class="input_create" placeholder="Id" />
-          </div>
-          <div>
-            <input class="input_create" placeholder="Name" />
-            <input class="input_create" placeholder="Price" />
-          </div>
-          <input class="input_create" placeholder="Stock" />
-          <button>Add</button>
+          <input id="input_search" placeholder="Input name" />
+          <button id="search_btn">Search</button>
         </div>
       </div>
       <div class="food_container"></div>
