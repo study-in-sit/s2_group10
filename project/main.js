@@ -6,9 +6,13 @@ let input_search = document.querySelector('#input_search'); //1
 let search_btn = document.querySelector('#search_btn');
 let show_cart_btn = document.querySelector('#show_cart');
 let shopping_cart_toggle = document.querySelector('.shopping_cart'); //1
+let cart_container = document.querySelector('.cart_container');
+let summary_price = document.querySelector('.summary_price');
 
 let showCart = false;
 let showSearch = false;
+
+const carts = [];
 
 function deleteChildFood() {
   //e.firstElementChild can be used.
@@ -16,6 +20,15 @@ function deleteChildFood() {
   while (child) {
     food_container.removeChild(child);
     child = food_container.lastElementChild;
+  }
+}
+
+function deleteChildFoods() {
+  //e.firstElementChild can be used.
+  var child = cart_container.lastElementChild;
+  while (child) {
+    cart_container.removeChild(child);
+    child = cart_container.lastElementChild;
   }
 }
 
@@ -33,12 +46,65 @@ const showHideShoping = () => {
 };
 
 const showHideSearch = () => {
-  if(showSearch) {
+  if (showSearch) {
     input_search.style.display = 'block';
   } else {
     input_search.style.display = 'none';
   }
-}
+};
+
+const summaryCalculator = () => {
+  console.log(carts);
+  const priceSum = carts.reduce((prev, current) => {
+    return prev + current.productDetails.Price * current.amount;
+  }, 0);
+  const TotalSum = carts.reduce((prev, current) => {
+    return prev + current.amount;
+  }, 0);
+  return { priceSum, TotalSum };
+};
+
+const addToCart = (id) => {
+  const indexFoodCart = carts.findIndex((e) => e.productDetails.ID === id);
+  if (indexFoodCart === -1) {
+    carts.push({
+      productDetails: foods.find((e) => e.ID === id),
+      amount: 1,
+    });
+  } else {
+    carts[indexFoodCart].amount = carts[indexFoodCart].amount + 1;
+  }
+  showCart = true;
+  showHideShoping();
+  cartList();
+  const { priceSum, TotalSum } = summaryCalculator();
+  console.log(priceSum, TotalSum);
+  summary_price.textContent = `Total foods : ${TotalSum} dishes , Total Price : ${priceSum} ฿`;
+};
+
+const cartList = () => {
+  deleteChildFoods();
+  for (const cart of carts) {
+    let cartItemContainer = document.createElement('div');
+    cartItemContainer.className = 'cart_item';
+    let ImgFood = document.createElement('img');
+    ImgFood.src = cart.productDetails.Img;
+    ImgFood.alt = cart.productDetails.Name;
+    let cartDeatil = document.createElement('div');
+    let Name = document.createElement('h3');
+    Name.textContent = `Name : ${cart.productDetails.Name}`;
+    let Amount = document.createElement('h3');
+    Amount.textContent = `Amount : ${cart.amount}`;
+    let Price = document.createElement('h3');
+    Price.textContent = `Price : ${cart.amount * cart.productDetails.Price}`;
+    cartDeatil.appendChild(Name);
+    cartDeatil.appendChild(Amount);
+    cartDeatil.appendChild(Price);
+    cartItemContainer.appendChild(ImgFood);
+    cartItemContainer.appendChild(cartDeatil);
+    cart_container.appendChild(cartItemContainer);
+  }
+};
 
 const productList = (value = '') => {
   const foodFilter = foods.filter((e) => e.Name.toLowerCase().includes(value));
@@ -76,6 +142,7 @@ const productList = (value = '') => {
     let btn = document.createElement('button');
     btn.className = 'btn_add';
     btn.textContent = 'Add to Cart';
+    btn.addEventListener('click', () => addToCart(food.ID));
 
     // append all elemnt to container
     container.appendChild(imageContainer);
@@ -102,3 +169,4 @@ search_btn.addEventListener('click', () => {
 productList('');
 showHideShoping();
 showHideSearch();
+cartList();

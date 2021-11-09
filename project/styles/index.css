@@ -149,7 +149,10 @@ button:hover {
 .cart_container {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fill, 150px);
   grid-gap: 5px;
+  height: 700px;
+  overflow-y: auto;
 }
 
 .cart_item {
@@ -187,4 +190,18 @@ button:hover {
 
 .show_cart_container:hover {
   transform: translateY(20px);
+}
+
+.summary_price {
+  height: 80px;
+  width: 90%;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #f0b90b;
+  color: #4f2580;
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
