@@ -2,12 +2,13 @@ import { foods } from './data.js';
 
 let food_container = document.querySelector('.food_container');
 
-let input_search = document.querySelector('#input_search');
+let input_search = document.querySelector('#input_search'); //1
 let search_btn = document.querySelector('#search_btn');
 let show_cart_btn = document.querySelector('#show_cart');
-let shopping_cart_toggle = document.querySelector('.shopping_cart');
+let shopping_cart_toggle = document.querySelector('.shopping_cart'); //1
 
 let showCart = false;
+let showSearch = false;
 
 function deleteChildFood() {
   //e.firstElementChild can be used.
@@ -30,6 +31,14 @@ const showHideShoping = () => {
     shopping_cart_toggle.style.display = 'none';
   }
 };
+
+const showHideSearch = () => {
+  if(showSearch) {
+    input_search.style.display = 'block';
+  } else {
+    input_search.style.display = 'none';
+  }
+}
 
 const productList = (value = '') => {
   const foodFilter = foods.filter((e) => e.Name.toLowerCase().includes(value));
@@ -86,7 +95,10 @@ const productList = (value = '') => {
 
 search_btn.addEventListener('click', () => {
   productList(input_search.value.toLowerCase());
+  showSearch = !showSearch;
+  showHideSearch();
 });
 
 productList('');
 showHideShoping();
+showHideSearch();
