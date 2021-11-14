@@ -1,4 +1,10 @@
+import { setCookie } from './cookie.js';
 import { foods } from './data.js';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+  setLocalStorage,
+} from './localstorage.js';
 
 let food_container = document.querySelector('.food_container');
 
@@ -8,11 +14,12 @@ let show_cart_btn = document.querySelector('#show_cart');
 let shopping_cart_toggle = document.querySelector('.shopping_cart'); //1
 let cart_container = document.querySelector('.cart_container');
 let summary_price = document.querySelector('.summary_price');
+let remove_icon_ico = document.querySelector('.remove_icon');
 
 let showCart = false;
 let showSearch = false;
 
-const carts = [];
+let carts = [];
 
 function deleteChildFood() {
   //e.firstElementChild can be used.
@@ -61,7 +68,24 @@ const summaryCalculator = () => {
   const TotalSum = carts.reduce((prev, current) => {
     return prev + current.amount;
   }, 0);
-  return { priceSum, TotalSum };
+  summary_price.textContent = `Total foods : ${TotalSum} dishes , Total Price : ${priceSum} ฿`;
+};
+
+const addCartToStorage = () => {
+  removeLocalStorage('carts');
+  setLocalStorage('carts', carts);
+};
+
+const loadCartsHistory = () => {
+  const result = getLocalStorage('carts');
+  if (result) {
+    carts = result;
+    if (carts.length !== 0) {
+      showCart = true;
+      showHideShoping();
+      summaryCalculator();
+    }
+  }
 };
 
 const addToCart = (id) => {
@@ -77,9 +101,19 @@ const addToCart = (id) => {
   showCart = true;
   showHideShoping();
   cartList();
-  const { priceSum, TotalSum } = summaryCalculator();
-  console.log(priceSum, TotalSum);
-  summary_price.textContent = `Total foods : ${TotalSum} dishes , Total Price : ${priceSum} ฿`;
+  summaryCalculator();
+  addCartToStorage();
+};
+
+const removeAllCartsList = () => {
+  const confirm = window.confirm('Are you sure delete all carts');
+  if (confirm) {
+    carts = [];
+    removeLocalStorage('carts');
+    showCart = false;
+    showHideShoping();
+    cartList();
+  }
 };
 
 const cartList = () => {
@@ -166,6 +200,11 @@ search_btn.addEventListener('click', () => {
   showHideSearch();
 });
 
+remove_icon_ico.addEventListener('click', removeAllCartsList);
+
+setCookie('name', 'Frong');
+
+loadCartsHistory();
 productList('');
 showHideShoping();
 showHideSearch();
