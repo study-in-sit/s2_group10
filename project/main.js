@@ -15,9 +15,12 @@ let shopping_cart_toggle = document.querySelector('.shopping_cart'); //1
 let cart_container = document.querySelector('.cart_container');
 let summary_price = document.querySelector('.summary_price');
 let remove_icon_ico = document.querySelector('.remove_icon');
+let enter_name = document.querySelector('.enter-name-popUp');
+let search_name = document.querySelector('.search_name')
 
 let showCart = false;
 let showSearch = false;
+let showName = true;
 
 let carts = [];
 
@@ -43,6 +46,19 @@ show_cart_btn.addEventListener('click', () => {
   showCart = !showCart;
   showHideShoping();
 });
+
+search_name.addEventListener('click', () => {
+  showName = !showName;
+  showHideName();
+})
+
+const showHideName = () => {
+ if(showName){
+   enter_name.style.display = 'flex';
+ } else {
+  enter_name.style.display = 'none';
+ }
+}
 
 const showHideShoping = () => {
   if (showCart) {
@@ -203,7 +219,7 @@ search_btn.addEventListener('click', () => {
 remove_icon_ico.addEventListener('click', removeAllCartsList);
 
 setCookie('name', 'Frong');
-
+showHideName();
 loadCartsHistory();
 productList('');
 showHideShoping();
