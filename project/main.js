@@ -117,6 +117,7 @@ const removeAllCartsList = () => {
     showCart = false;
     showHideShoping();
     cartList();
+    summaryCalculator();
   }
 };
 
