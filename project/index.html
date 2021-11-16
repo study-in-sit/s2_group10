@@ -18,14 +18,14 @@
     <div id="show_cart" class="show_cart_container">
       <span class="iconify" data-icon="bx:bxs-cart-alt"></span>
     </div>
-    <form>
-    <div id="save_name" class="save_names">
-      <input type="text" id="name" placeholder="Input Your Name"/>
+    <div class="enter-name-popUp">
+      <div id="save_name" class="save_names">
+        <input type="text" id="name-input" placeholder="Input Your Name" />
+      </div>
+      <div id="save" class="saves">
+        <button id="btn-enter-name">Save</button>
+      </div>
     </div>
-    <div id="save" class="saves">
-        <button id="btn">Save</button>  
-        </div>
-      </form> 
     <div class="shopping_cart">
       <h2>Your cart</h2>
       <div class="remove_icon">
@@ -48,7 +48,7 @@
     </div>
     <div class="container">
       <h1>GROUP 10 FOOD PRODUCT LIST</h1>
-      <h1>Name : Frong</h1>
+      <h1 id="name_value"></h1>
       <div class="event_container">
         <div class="seaching">
           <h2>Search Products</h2>

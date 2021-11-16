@@ -1,4 +1,4 @@
-import { setCookie } from './cookie.js';
+import { getCookie, setCookie } from './cookie.js';
 import { foods } from './data.js';
 import {
   getLocalStorage,
@@ -16,11 +16,12 @@ let cart_container = document.querySelector('.cart_container');
 let summary_price = document.querySelector('.summary_price');
 let remove_icon_ico = document.querySelector('.remove_icon');
 let enter_name = document.querySelector('.enter-name-popUp');
-let search_name = document.querySelector('.search_name')
+let btn_enter_name = document.querySelector('#btn-enter-name');
+let name_input = document.querySelector('#name-input');
+let name_value = document.querySelector('#name_value');
 
 let showCart = false;
 let showSearch = false;
-let showName = true;
 
 let carts = [];
 
@@ -46,19 +47,6 @@ show_cart_btn.addEventListener('click', () => {
   showCart = !showCart;
   showHideShoping();
 });
-
-search_name.addEventListener('click', () => {
-  showName = !showName;
-  showHideName();
-})
-
-const showHideName = () => {
- if(showName){
-   enter_name.style.display = 'flex';
- } else {
-  enter_name.style.display = 'none';
- }
-}
 
 const showHideShoping = () => {
   if (showCart) {
@@ -218,27 +206,29 @@ search_btn.addEventListener('click', () => {
 
 remove_icon_ico.addEventListener('click', removeAllCartsList);
 
-//name repository
-let names = [];
+//name repository Cookies Funcions
+const initialCall = () => {
+  const nameCookie = getCookie('name');
+  if (!nameCookie) {
+    enter_name.style.display = 'flex';
+  } else {
+    enter_name.style.display = 'none';
+    name_value.textContent = 'Name :' + nameCookie;
+  }
+};
 
-let name = {
-    name: document.getElementById('name').value
-}
-
-names.push(names);
-document.forms[0].reset();
-
-console.warn('added', {names});
-
-
-localStorage.setItem('addName', JSON.stringify(name));
-
-document.addEventListener('DOM', () => {
-    document.getElementById('btn').addEventListener('click', addName);
+btn_enter_name.addEventListener('click', () => {
+  const nameValue = name_input.value;
+  if (!nameValue) {
+    alert('Please Enter Your Name');
+  } else {
+    setCookie('name', nameValue, 1 / 2);
+    enter_name.style.display = 'none';
+    name_value.textContent = 'Name :' + nameValue;
+  }
 });
 
-setCookie('name', 'Frong');
-showHideName();
+initialCall();
 loadCartsHistory();
 productList('');
 showHideShoping();
