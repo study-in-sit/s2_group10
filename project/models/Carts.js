@@ -89,17 +89,6 @@ class Carts {
     setLocalStorage('carts', this._carts);
   }
 
-  removeAllCart() {
-    const confirm = window.confirm('Are you sure delete all carts');
-    if (confirm) {
-      this._carts = [];
-      removeLocalStorage('carts');
-      this._showCartPopup = true;
-      this.showHidePopUp();
-      this.render();
-    }
-  }
-
   render() {
     this.clearCartsRender();
     if (this._carts.length === 0) {
